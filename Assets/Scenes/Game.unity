@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 145903517}
   m_Layer: 0
   m_Name: TopWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,7 +170,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.33778048, y: 0}
+  m_Offset: {x: -0.33778, y: 0.99874616}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -180,7 +180,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 19.181374, y: 1}
+  m_Size: {x: 19.181374, y: 1.886106}
   m_EdgeRadius: 0
 --- !u!4 &145903518
 Transform:
@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 145903513}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.46, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 1443272188}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,7 +649,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.30840826}
+  m_Offset: {x: 0.72077465, y: 0.30840826}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -659,7 +659,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 12.455148}
+  m_Size: {x: 1.6205349, y: 12.455148}
   m_EdgeRadius: 0
 --- !u!4 &1443272191
 Transform:
@@ -670,7 +670,7 @@ Transform:
   m_GameObject: {fileID: 1443272186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.43, y: 0, z: 0}
+  m_LocalPosition: {x: 9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 1634424576}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,7 +727,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.08811617}
+  m_Offset: {x: -0.47437477, y: -0.08811617}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -737,7 +737,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 13.306941}
+  m_Size: {x: 1.1897488, y: 13.306941}
   m_EdgeRadius: 0
 --- !u!4 &1634424580
 Transform:
@@ -748,7 +748,7 @@ Transform:
   m_GameObject: {fileID: 1634424575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.38, y: 0, z: 0}
+  m_LocalPosition: {x: -9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 1736172754}
   m_Layer: 0
   m_Name: BottomWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -805,7 +805,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.036714554, y: 0}
+  m_Offset: {x: -0.036714554, y: -0.8574083}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -815,7 +815,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 18.872967, y: 1}
+  m_Size: {x: 18.872967, y: 1.8181796}
   m_EdgeRadius: 0
 --- !u!4 &1736172755
 Transform:
@@ -826,7 +826,7 @@ Transform:
   m_GameObject: {fileID: 1736172751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.46, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -873,7 +873,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 504606869692283709, guid: 359ad3f4bbaa97347822f0328668bdd6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 504606869692283709, guid: 359ad3f4bbaa97347822f0328668bdd6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -918,36 +918,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8998264273785255638, guid: 359ad3f4bbaa97347822f0328668bdd6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8244674891095934121}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 359ad3f4bbaa97347822f0328668bdd6, type: 3}
---- !u!1 &8244674891095934120 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8998264273785255638, guid: 359ad3f4bbaa97347822f0328668bdd6, type: 3}
-  m_PrefabInstance: {fileID: 8244674891095934119}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8244674891095934121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8244674891095934120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f640082ff72b973479f4499a1b2910f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodPrefab: {fileID: 8975585368017944578, guid: be11292227331d54fb0b40b7f17e048a, type: 3}
-  tailPrefab: {fileID: 2348490556137524547, guid: d0718bccac102ba429871fa5443a0a4b, type: 3}
-  stepRate: 0
-  currentAngleZ: 0
-  topWallPosition: {x: 0, y: 0}
-  bottomWallPosition: {x: 0, y: 0}
-  leftWallPosition: {x: 0, y: 0}
-  rightWallPosition: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
