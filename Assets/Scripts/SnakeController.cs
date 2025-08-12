@@ -61,6 +61,31 @@ public class SnakeController : MonoBehaviour
             isFoodEating = true;
             SpawnFood();
         }
+
+         else if (collision.CompareTag("Wall"))
+        {
+            Vector2 teleportPosition = transform.position;
+
+            if (collision.gameObject.name == "TopWall")
+            {
+                teleportPosition.y = bottomWallPosition.y;
+            }
+            else if (collision.gameObject.name == "BottomWall")
+            {
+                teleportPosition.y = topWallPosition.y;
+            }
+            else if (collision.gameObject.name == "LeftWall")
+            {
+                teleportPosition.x = rightWallPosition.x;
+            }
+            else if (collision.gameObject.name == "RightWall")
+            {
+                teleportPosition.x = leftWallPosition.x;
+            }
+
+            transform.position = teleportPosition;
+            Movement();
+        }
     }
 
     void AddTail(Vector2 headPosition)
