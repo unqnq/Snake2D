@@ -11,6 +11,7 @@ public class SnakeController : MonoBehaviour
     private List<Transform> tail = new List<Transform>();
     private bool isFoodEating = false;
     private Vector2 topWallPosition, bottomWallPosition, leftWallPosition, rightWallPosition;
+    private UIController uiController;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class SnakeController : MonoBehaviour
         bottomWallPosition = GameObject.Find("BottomWall").transform.position;
         leftWallPosition = GameObject.Find("LeftWall").transform.position;
         rightWallPosition = GameObject.Find("RightWall").transform.position;
+        uiController = GameObject.Find("UIController").GetComponent<UIController>();
 
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
@@ -93,6 +95,7 @@ public class SnakeController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             isFoodEating = true;
+            uiController.UpdateScore();
             SpawnFood();
         }
 
