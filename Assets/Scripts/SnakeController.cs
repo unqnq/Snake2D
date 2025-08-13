@@ -25,9 +25,39 @@ public class SnakeController : MonoBehaviour
 
     void SpawnFood()
     {
-        int spawnX = (int)Random.Range(leftWallPosition.x + 1f, rightWallPosition.x - 1f);
-        int spawnY = (int)Random.Range(bottomWallPosition.y + 1f, topWallPosition.y - 1f);
-        food = Instantiate(foodPrefab, new Vector2(spawnX, spawnY), Quaternion.identity);
+
+        Vector3 spawnPosition;
+        bool canSpawn;
+        do
+        {
+            canSpawn = true;
+            int spawnX = (int)Random.Range(leftWallPosition.x + 1f, rightWallPosition.x - 1f);
+            int spawnY = (int)Random.Range(bottomWallPosition.y + 1f, topWallPosition.y - 1f);
+
+            spawnPosition = new Vector2(spawnX, spawnY);
+
+            if (spawnPosition == transform.position)
+            {
+                canSpawn = false;
+                Debug.Log("false");
+            }
+
+            if (canSpawn)
+            {
+                foreach (Transform segment in tail)
+                {
+                    if (spawnPosition == segment.position)
+                    {
+                        canSpawn = false;
+                        Debug.Log("false");
+                        break;
+                    }
+                }
+            }
+        }
+        while (!canSpawn); //поки не можна спавнити їжу - повторюємо цикл
+
+        food = Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
     }
 
     void Movement()
@@ -62,7 +92,7 @@ public class SnakeController : MonoBehaviour
             SpawnFood();
         }
 
-         else if (collision.CompareTag("Wall"))
+        else if (collision.CompareTag("Wall"))
         {
             Vector2 teleportPosition = transform.position;
 
