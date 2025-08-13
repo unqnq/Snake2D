@@ -22,6 +22,8 @@ public class SnakeController : MonoBehaviour
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
         SpawnFood();
+        AddTail(transform.position);
+        AddTail(transform.position);
     }
 
     void SpawnFood()
