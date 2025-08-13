@@ -7,7 +7,7 @@ public class SnakeController : MonoBehaviour
     [SerializeField] private GameObject foodPrefab, tailPrefab;
     private GameObject food;
     [SerializeField] private float stepRate = 0.3f;
-    private Vector2 move = new Vector2(-1f, 0);
+    private Vector2 move = new Vector2(-1f, 0), nextMove;
     private List<Transform> tail = new List<Transform>();
     private bool isFoodEating = false;
     private Vector2 topWallPosition, bottomWallPosition, leftWallPosition, rightWallPosition;
@@ -19,6 +19,7 @@ public class SnakeController : MonoBehaviour
         leftWallPosition = GameObject.Find("LeftWall").transform.position;
         rightWallPosition = GameObject.Find("RightWall").transform.position;
 
+        nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
         SpawnFood();
     }
@@ -39,7 +40,7 @@ public class SnakeController : MonoBehaviour
             if (spawnPosition == transform.position)
             {
                 canSpawn = false;
-                Debug.Log("false");
+                // Debug.Log("false");
             }
 
             if (canSpawn)
@@ -49,7 +50,7 @@ public class SnakeController : MonoBehaviour
                     if (spawnPosition == segment.position)
                     {
                         canSpawn = false;
-                        Debug.Log("false");
+                        // Debug.Log("false");
                         break;
                     }
                 }
@@ -62,6 +63,7 @@ public class SnakeController : MonoBehaviour
 
     void Movement()
     {
+        move = nextMove;
         Vector2 currentPosition = transform.position;
         transform.position = currentPosition + move;
 
@@ -80,7 +82,7 @@ public class SnakeController : MonoBehaviour
         if (newDirection == Vector2.zero) return;
         if (newDirection == -move) return;
         if (Mathf.Abs(newDirection.x) > 0 && Mathf.Abs(newDirection.y) > 0) return; // ігнорувати діагональ 
-        move = newDirection;
+        nextMove = newDirection;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
