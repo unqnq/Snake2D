@@ -7,7 +7,7 @@ public class SnakeController : MonoBehaviour
     [SerializeField] private GameObject foodPrefab, tailPrefab;
     private GameObject food;
     [SerializeField] private float stepRate = 0.3f;
-    private Vector2 move = new Vector2(-1f, 0), nextMove;
+    private Vector3 move = new Vector2(-1f, 0), nextMove;
     private List<Transform> tail = new List<Transform>();
     private bool isFoodEating = false;
     private Vector2 topWallPosition, bottomWallPosition, leftWallPosition, rightWallPosition;
@@ -24,8 +24,8 @@ public class SnakeController : MonoBehaviour
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
         SpawnFood();
-        AddTail(transform.position);
-        AddTail(transform.position);
+        AddTail(transform.position - move);
+        AddTail(transform.position - move * 2);
     }
 
     void SpawnFood()
@@ -68,7 +68,7 @@ public class SnakeController : MonoBehaviour
     void Movement()
     {
         move = nextMove;
-        Vector2 currentPosition = transform.position;
+        Vector3 currentPosition = transform.position;
         transform.position = currentPosition + move;
 
         if (isFoodEating)
@@ -82,8 +82,8 @@ public class SnakeController : MonoBehaviour
 
     public void SetDirection(InputAction.CallbackContext context)
     {
-        Vector2 newDirection = context.ReadValue<Vector2>();
-        if (newDirection == Vector2.zero) return;
+        Vector3 newDirection = context.ReadValue<Vector2>();
+        if (newDirection == Vector3.zero) return;
         if (newDirection == -move) return;
         if (Mathf.Abs(newDirection.x) > 0 && Mathf.Abs(newDirection.y) > 0) return; // ігнорувати діагональ 
         nextMove = newDirection;
@@ -122,6 +122,10 @@ public class SnakeController : MonoBehaviour
 
             transform.position = teleportPosition;
             Movement();
+        }
+        else if (collision.CompareTag("Snake"))
+        {
+            uiController.GameOver();
         }
     }
 
