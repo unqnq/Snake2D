@@ -22,7 +22,7 @@ public class SnakeController : MonoBehaviour
         bottomWallPosition = GameObject.Find("BottomWall").transform.position;
         leftWallPosition = GameObject.Find("LeftWall").transform.position;
         rightWallPosition = GameObject.Find("RightWall").transform.position;
-        uiController = GameObject.Find("UIController").GetComponent<UIController>();
+        uiController = GameObject.Find("UIController")?.GetComponent<UIController>();
         colorData = Resources.Load<ColorData>("ColorData");
         difficultyData = Resources.Load<DifficultyData>("DifficultyData");
 
@@ -114,7 +114,7 @@ public class SnakeController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             isFoodEating = true;
-            uiController.UpdateScore();
+            uiController?.UpdateScore();
             SpawnFood();
         }
 
@@ -144,7 +144,7 @@ public class SnakeController : MonoBehaviour
         }
         else if (collision.CompareTag("Snake"))
         {
-            uiController.GameOver();
+            uiController?.GameOver();
         }
     }
 

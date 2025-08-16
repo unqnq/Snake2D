@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec107fc87512f144bde699063827dc7, type: 3}
   m_Name: DifficultyData
   m_EditorClassIdentifier: 
-  stepRate: 0.3
-  startingTailLength: 2
+  stepRate: 0.19999999
+  startingTailLength: 1

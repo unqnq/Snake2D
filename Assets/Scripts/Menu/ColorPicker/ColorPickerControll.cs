@@ -173,7 +173,7 @@ public class ColorPickerControll : MonoBehaviour
         float y = currentValue * height - height / 2f;
 
         // Передаємо їх у SVImageControll
-        FindObjectOfType<SVImageControll>().SetPickerPosition(new Vector2(x, y));
+        FindFirstObjectByType<SVImageControll>().SetPickerPosition(new Vector2(x, y));
     }
 
     private void UpdateRGB()
