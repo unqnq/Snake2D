@@ -10,9 +10,12 @@ public class SnakeController : MonoBehaviour
     private Vector3 move = new Vector2(-1f, 0), nextMove;
     private List<Transform> tail = new List<Transform>();
     private bool isFoodEating = false;
+    [SerializeField] private bool spawnFood;
     private Vector2 topWallPosition, bottomWallPosition, leftWallPosition, rightWallPosition;
     private UIController uiController;
 
+    private ColorData colorData;
+    private DifficultyData difficultyData;
     void Start()
     {
         topWallPosition = GameObject.Find("TopWall").transform.position;
@@ -20,49 +23,65 @@ public class SnakeController : MonoBehaviour
         leftWallPosition = GameObject.Find("LeftWall").transform.position;
         rightWallPosition = GameObject.Find("RightWall").transform.position;
         uiController = GameObject.Find("UIController").GetComponent<UIController>();
+        colorData = Resources.Load<ColorData>("ColorData");
+        difficultyData = Resources.Load<DifficultyData>("DifficultyData");
 
+        stepRate = difficultyData.stepRate;
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
         SpawnFood();
-        AddTail(transform.position - move);
-        AddTail(transform.position - move * 2);
+        
+        for (int i = 1; i <= difficultyData.startingTailLength; i++)
+        {
+            AddTail(transform.position - move * i);
+        }
+    }
+
+    void Update()
+    {
+        if (colorData != null)
+        {
+            GetComponent<SpriteRenderer>().color = colorData.currrentColor;
+        }
     }
 
     void SpawnFood()
     {
-
-        Vector3 spawnPosition;
-        bool canSpawn;
-        do
+        if (spawnFood)
         {
-            canSpawn = true;
-            int spawnX = (int)Random.Range(leftWallPosition.x + 1f, rightWallPosition.x - 1f);
-            int spawnY = (int)Random.Range(bottomWallPosition.y + 1f, topWallPosition.y - 1f);
-
-            spawnPosition = new Vector2(spawnX, spawnY);
-
-            if (spawnPosition == transform.position)
+            Vector3 spawnPosition;
+            bool canSpawn;
+            do
             {
-                canSpawn = false;
-                // Debug.Log("false");
-            }
+                canSpawn = true;
+                int spawnX = (int)Random.Range(leftWallPosition.x + 1f, rightWallPosition.x - 1f);
+                int spawnY = (int)Random.Range(bottomWallPosition.y + 1f, topWallPosition.y - 1f);
 
-            if (canSpawn)
-            {
-                foreach (Transform segment in tail)
+                spawnPosition = new Vector2(spawnX, spawnY);
+
+                if (spawnPosition == transform.position)
                 {
-                    if (spawnPosition == segment.position)
+                    canSpawn = false;
+                    // Debug.Log("false");
+                }
+
+                if (canSpawn)
+                {
+                    foreach (Transform segment in tail)
                     {
-                        canSpawn = false;
-                        // Debug.Log("false");
-                        break;
+                        if (spawnPosition == segment.position)
+                        {
+                            canSpawn = false;
+                            // Debug.Log("false");
+                            break;
+                        }
                     }
                 }
             }
-        }
-        while (!canSpawn); //поки не можна спавнити їжу - повторюємо цикл
+            while (!canSpawn); //поки не можна спавнити їжу - повторюємо цикл
 
-        food = Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
+            food = Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 
     void Movement()

@@ -30,6 +30,12 @@ public class UIController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Game");
+    }
+
+    public void OpenMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

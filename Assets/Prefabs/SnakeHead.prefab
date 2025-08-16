@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -896380346, guid: ad642e779f28575408602efab58e1bd8, type: 3}
+  m_Sprite: {fileID: 325322449, guid: ad642e779f28575408602efab58e1bd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,7 +129,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6666667, y: 0.6666667}
     newSize: {x: 0.08, y: 0.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,7 +179,8 @@ MonoBehaviour:
   foodPrefab: {fileID: 8975585368017944578, guid: be11292227331d54fb0b40b7f17e048a, type: 3}
   tailPrefab: {fileID: 2348490556137524547, guid: d0718bccac102ba429871fa5443a0a4b, type: 3}
   stepRate: 0.3
-  currentAngleZ: 0
+  spawnFood: 0
+  colorData: {fileID: 0}
 --- !u!114 &7217906831783323934
 MonoBehaviour:
   m_ObjectHideFlags: 0
