@@ -16,17 +16,27 @@ public class DifficultySelector : MonoBehaviour
         optionsPanel = GameObject.Find("OptionsPanel");
         optionsPanel.SetActive(false);
 
+        difficultyData.stepRate = PlayerPrefs.GetFloat("StepRate", difficultyData.stepRate);
+        difficultyData.startingTailLength = PlayerPrefs.GetInt("TailLength", difficultyData.startingTailLength);
+
         speedSlider.value = speedSlider.maxValue - difficultyData.stepRate;
         tailSlider.value = difficultyData.startingTailLength;
+
+        speedSlider.onValueChanged.AddListener(delegate { OnSpeedChanged(); });
+        tailSlider.onValueChanged.AddListener(delegate { OnTailChanged(); });
     }
 
     public void OnSpeedChanged()
     {
         difficultyData.stepRate = speedSlider.maxValue - speedSlider.value;
+        PlayerPrefs.SetFloat("StepRate", difficultyData.stepRate);
+        PlayerPrefs.Save();
     }
 
     public void OnTailChanged()
     {
         difficultyData.startingTailLength = (int)tailSlider.value;
+        PlayerPrefs.SetInt("TailLength", difficultyData.startingTailLength);
+        PlayerPrefs.Save();
     }
 }

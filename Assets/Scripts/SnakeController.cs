@@ -24,13 +24,28 @@ public class SnakeController : MonoBehaviour
         rightWallPosition = GameObject.Find("RightWall").transform.position;
         uiController = GameObject.Find("UIController")?.GetComponent<UIController>();
         colorData = Resources.Load<ColorData>("ColorData");
+
+        if (colorData != null)
+        {
+            colorData.currrentColor = SnakeColorManager.LoadColor(colorData.currrentColor);
+            GetComponent<SpriteRenderer>().color = colorData.currrentColor;
+        }
+
         difficultyData = Resources.Load<DifficultyData>("DifficultyData");
 
-        stepRate = difficultyData.stepRate;
+        if (difficultyData != null)
+        {
+#if UNITY_WEBGL
+            stepRate = PlayerPrefs.GetFloat("StepRate", difficultyData.stepRate);
+            difficultyData.startingTailLength = PlayerPrefs.GetInt("TailLength", difficultyData.startingTailLength);
+#else
+            stepRate = difficultyData.stepRate;
+#endif
+        }
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
         SpawnFood();
-        
+
         for (int i = 1; i <= difficultyData.startingTailLength; i++)
         {
             AddTail(transform.position - move * i);
@@ -42,6 +57,11 @@ public class SnakeController : MonoBehaviour
         if (colorData != null)
         {
             GetComponent<SpriteRenderer>().color = colorData.currrentColor;
+        }
+
+        if (WebGLUtils.IsMobile() || Application.isMobilePlatform)
+        {
+            HandleTouchInput();
         }
     }
 
@@ -62,7 +82,6 @@ public class SnakeController : MonoBehaviour
                 if (spawnPosition == transform.position)
                 {
                     canSpawn = false;
-                    // Debug.Log("false");
                 }
 
                 if (canSpawn)
@@ -72,7 +91,6 @@ public class SnakeController : MonoBehaviour
                         if (spawnPosition == segment.position)
                         {
                             canSpawn = false;
-                            // Debug.Log("false");
                             break;
                         }
                     }
@@ -107,6 +125,52 @@ public class SnakeController : MonoBehaviour
         if (Mathf.Abs(newDirection.x) > 0 && Mathf.Abs(newDirection.y) > 0) return; // ігнорувати діагональ 
         nextMove = newDirection;
     }
+
+    void HandleTouchInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == UnityEngine.TouchPhase.Moved)
+            {
+                Vector3 newDirection = Vector3.zero;
+
+                if (Mathf.Abs(touch.deltaPosition.x) > Mathf.Abs(touch.deltaPosition.y))
+                {
+                    // Горизонтальний свайп
+                    newDirection = touch.deltaPosition.x > 0f ? Vector3.right : Vector3.left;
+                }
+                else if (Mathf.Abs(touch.deltaPosition.y) > Mathf.Abs(touch.deltaPosition.x))
+                {
+                    // Вертикальний свайп
+                    newDirection = touch.deltaPosition.y > 0f ? Vector3.up : Vector3.down;
+                }
+
+                if (newDirection != Vector3.zero && newDirection != -move)
+                {
+                    nextMove = newDirection;
+                }
+                // if (touch.deltaPosition.x > 0f)
+                // {
+                //     nextMove = new Vector3(1, 0, 0);
+                // }
+                // else if (touch.deltaPosition.x < 0f)
+                // {
+                //     nextMove = new Vector3(-1, 0, 0);
+                // }
+                // else if (touch.deltaPosition.y > 0f)
+                // {
+                //     nextMove = new Vector3(0, 1, 0);
+                // }
+                // else if (touch.deltaPosition.y < 0f)
+                // {
+                //     nextMove = new Vector3(0, -1, 0);
+                // }
+            }
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -174,5 +238,15 @@ public class SnakeController : MonoBehaviour
         {
             tail[0].position = headPosition;
         }
+    }
+
+    public void UpdateSnakeColor(Color newColor)
+    {
+        GetComponent<SpriteRenderer>().color = newColor;
+        if (colorData != null)
+        {
+            colorData.currrentColor = newColor;
+        }
+        SnakeColorManager.SaveColor(newColor);
     }
 }

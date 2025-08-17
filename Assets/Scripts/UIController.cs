@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour
         if (score > PlayerPrefs.GetInt("BestScore", 0))
         {
             PlayerPrefs.SetInt("BestScore", score);
-            Debug.Log("best score: " + PlayerPrefs.GetInt("BestScore"));
         }
         Time.timeScale = 0;
         gameOverPanel.SetActive(true);
@@ -44,7 +43,6 @@ public class UIController : MonoBehaviour
         if (score > PlayerPrefs.GetInt("BestScore", 0))
         {
             PlayerPrefs.SetInt("BestScore", score);
-            Debug.Log("best score: " + score);
         }
         SceneManager.LoadScene("Menu");
     }

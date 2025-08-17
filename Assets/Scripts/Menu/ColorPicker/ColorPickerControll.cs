@@ -24,19 +24,22 @@ public class ColorPickerControll : MonoBehaviour
     void Start()
     {
         colorData = Resources.Load<ColorData>("ColorData");
+        colorData.currrentColor = SnakeColorManager.LoadColor(colorData.currrentColor);
+
+        Color.RGBToHSV(colorData.currrentColor, out currenrtHue, out currentSaturation, out currentValue);
         CreateHueImage();
         CreateSaturationImage();
 
-        if (colorData != null)
-        {
-            Color.RGBToHSV(colorData.currrentColor, out currenrtHue, out currentSaturation, out currentValue);
-        }
-        else
-        {
-            currenrtHue = 0f;
-            currentSaturation = 0.8f;
-            currentValue = 0.8f;
-        }
+        // if (colorData != null)
+        // {
+        //     Color.RGBToHSV(colorData.currrentColor, out currenrtHue, out currentSaturation, out currentValue);
+        // }
+        // else
+        // {
+        //     currenrtHue = 0f;
+        //     currentSaturation = 0.8f;
+        //     currentValue = 0.8f;
+        // }
         CreateOutputImage();
         UpdateOutputImage();
         UpdatePickerPosition();
@@ -114,6 +117,14 @@ public class ColorPickerControll : MonoBehaviour
         }
         outputTexture.Apply();
         hexText.text = ColorUtility.ToHtmlStringRGB(colorData.currrentColor);
+
+        SnakeController snake = FindFirstObjectByType<SnakeController>();
+        if (snake != null)
+        {
+            snake.UpdateSnakeColor(colorData.currrentColor);
+        }
+
+        SnakeColorManager.SaveColor(colorData.currrentColor);
 
     }
     public void SetSV(float saturation, float value)
