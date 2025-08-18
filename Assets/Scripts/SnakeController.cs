@@ -63,6 +63,8 @@ public class SnakeController : MonoBehaviour
         {
             HandleTouchInput();
         }
+
+        CheckScreenBounds();
     }
 
     void SpawnFood()
@@ -171,6 +173,34 @@ public class SnakeController : MonoBehaviour
         }
     }
 
+    private void CheckScreenBounds()
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 newPosition = transform.position;
+        float topOffset = 225f;
+
+        if (screenPos.x < 0f)
+        {
+            newPosition.x = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+        }
+        else if (screenPos.x > Screen.width)
+        {
+            newPosition.x = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        }
+        else if (screenPos.y < 0f)
+        {
+            newPosition.y = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height - topOffset, 0)).y;
+        }
+        else if (screenPos.y > Screen.height - topOffset)
+        {
+            newPosition.y = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
+        }
+        if (newPosition != transform.position)
+        {
+            transform.position = newPosition;
+            Movement();
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -182,30 +212,30 @@ public class SnakeController : MonoBehaviour
             SpawnFood();
         }
 
-        else if (collision.CompareTag("Wall"))
-        {
-            Vector2 teleportPosition = transform.position;
+        // else if (collision.CompareTag("Wall"))
+        // {
+        //     Vector2 teleportPosition = transform.position;
 
-            if (collision.gameObject.name == "TopWall")
-            {
-                teleportPosition.y = bottomWallPosition.y;
-            }
-            else if (collision.gameObject.name == "BottomWall")
-            {
-                teleportPosition.y = topWallPosition.y;
-            }
-            else if (collision.gameObject.name == "LeftWall")
-            {
-                teleportPosition.x = rightWallPosition.x;
-            }
-            else if (collision.gameObject.name == "RightWall")
-            {
-                teleportPosition.x = leftWallPosition.x;
-            }
+        //     if (collision.gameObject.name == "TopWall")
+        //     {
+        //         teleportPosition.y = bottomWallPosition.y;
+        //     }
+        //     else if (collision.gameObject.name == "BottomWall")
+        //     {
+        //         teleportPosition.y = topWallPosition.y;
+        //     }
+        //     else if (collision.gameObject.name == "LeftWall")
+        //     {
+        //         teleportPosition.x = rightWallPosition.x;
+        //     }
+        //     else if (collision.gameObject.name == "RightWall")
+        //     {
+        //         teleportPosition.x = leftWallPosition.x;
+        //     }
 
-            transform.position = teleportPosition;
-            Movement();
-        }
+        //     transform.position = teleportPosition;
+        //     Movement();
+        // }
         else if (collision.CompareTag("Snake"))
         {
             uiController?.GameOver();

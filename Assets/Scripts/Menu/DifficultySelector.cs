@@ -28,7 +28,7 @@ public class DifficultySelector : MonoBehaviour
 
     public void OnSpeedChanged()
     {
-        difficultyData.stepRate = speedSlider.maxValue - speedSlider.value;
+        difficultyData.stepRate = speedSlider.maxValue - speedSlider.value + 0.05f;
         PlayerPrefs.SetFloat("StepRate", difficultyData.stepRate);
         PlayerPrefs.Save();
     }
