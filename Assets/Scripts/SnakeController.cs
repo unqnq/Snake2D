@@ -10,18 +10,18 @@ public class SnakeController : MonoBehaviour
     private Vector3 move = new Vector2(-1f, 0), nextMove;
     private List<Transform> tail = new List<Transform>();
     private bool isFoodEating = false;
-    [SerializeField] private bool spawnFood;
-    private Vector2 topWallPosition, bottomWallPosition, leftWallPosition, rightWallPosition;
+    public bool spawnFood = true;
+    private float topOffset = 225f;
     private UIController uiController;
 
     private ColorData colorData;
     private DifficultyData difficultyData;
     void Start()
     {
-        topWallPosition = GameObject.Find("TopWall").transform.position;
-        bottomWallPosition = GameObject.Find("BottomWall").transform.position;
-        leftWallPosition = GameObject.Find("LeftWall").transform.position;
-        rightWallPosition = GameObject.Find("RightWall").transform.position;
+        // topWallPosition = GameObject.Find("TopWall").transform.position;
+        // bottomWallPosition = GameObject.Find("BottomWall").transform.position;
+        // leftWallPosition = GameObject.Find("LeftWall").transform.position;
+        // rightWallPosition = GameObject.Find("RightWall").transform.position;
         uiController = GameObject.Find("UIController")?.GetComponent<UIController>();
         colorData = Resources.Load<ColorData>("ColorData");
 
@@ -71,15 +71,26 @@ public class SnakeController : MonoBehaviour
     {
         if (spawnFood)
         {
+
+
             Vector3 spawnPosition;
             bool canSpawn;
+
+            Vector2 min = Camera.main.ScreenToWorldPoint(Vector3.zero);
+            Vector2 max = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height - topOffset, 0f));
+
+            int minX = Mathf.CeilToInt(min.x);
+            int maxX = Mathf.FloorToInt(max.x);
+            int minY = Mathf.CeilToInt(min.y);
+            int maxY = Mathf.FloorToInt(max.y);
+
             do
             {
                 canSpawn = true;
-                int spawnX = (int)Random.Range(leftWallPosition.x + 1f, rightWallPosition.x - 1f);
-                int spawnY = (int)Random.Range(bottomWallPosition.y + 1f, topWallPosition.y - 1f);
 
-                spawnPosition = new Vector2(spawnX, spawnY);
+                int x = Random.Range(minX + 1, maxX);
+                int y = Random.Range(minY + 1, maxY);
+                spawnPosition = new Vector2(x, y);
 
                 if (spawnPosition == transform.position)
                 {
@@ -153,22 +164,6 @@ public class SnakeController : MonoBehaviour
                 {
                     nextMove = newDirection;
                 }
-                // if (touch.deltaPosition.x > 0f)
-                // {
-                //     nextMove = new Vector3(1, 0, 0);
-                // }
-                // else if (touch.deltaPosition.x < 0f)
-                // {
-                //     nextMove = new Vector3(-1, 0, 0);
-                // }
-                // else if (touch.deltaPosition.y > 0f)
-                // {
-                //     nextMove = new Vector3(0, 1, 0);
-                // }
-                // else if (touch.deltaPosition.y < 0f)
-                // {
-                //     nextMove = new Vector3(0, -1, 0);
-                // }
             }
         }
     }
@@ -177,7 +172,6 @@ public class SnakeController : MonoBehaviour
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 newPosition = transform.position;
-        float topOffset = 225f;
 
         if (screenPos.x < 0f)
         {
@@ -212,30 +206,6 @@ public class SnakeController : MonoBehaviour
             SpawnFood();
         }
 
-        // else if (collision.CompareTag("Wall"))
-        // {
-        //     Vector2 teleportPosition = transform.position;
-
-        //     if (collision.gameObject.name == "TopWall")
-        //     {
-        //         teleportPosition.y = bottomWallPosition.y;
-        //     }
-        //     else if (collision.gameObject.name == "BottomWall")
-        //     {
-        //         teleportPosition.y = topWallPosition.y;
-        //     }
-        //     else if (collision.gameObject.name == "LeftWall")
-        //     {
-        //         teleportPosition.x = rightWallPosition.x;
-        //     }
-        //     else if (collision.gameObject.name == "RightWall")
-        //     {
-        //         teleportPosition.x = leftWallPosition.x;
-        //     }
-
-        //     transform.position = teleportPosition;
-        //     Movement();
-        // }
         else if (collision.CompareTag("Snake"))
         {
             uiController?.GameOver();
