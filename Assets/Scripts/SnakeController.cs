@@ -111,6 +111,8 @@ public class SnakeController : MonoBehaviour
         Vector3 currentPosition = transform.position;
         transform.position = currentPosition + move;
 
+        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), transform.position.z);
+
         if (isFoodEating)
         {
             AddTail(currentPosition);
