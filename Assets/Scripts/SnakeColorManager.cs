@@ -8,12 +8,10 @@ public static class SnakeColorManager
 
     public static void SaveColor(Color color)
     {
-#if UNITY_WEBGL
         PlayerPrefs.SetFloat(COLOR_R, color.r);
         PlayerPrefs.SetFloat(COLOR_G, color.g);
         PlayerPrefs.SetFloat(COLOR_B, color.b);
         PlayerPrefs.Save();
-#endif
     }
 
     public static Color LoadColor(Color defaultColor)

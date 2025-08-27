@@ -51,7 +51,7 @@ public class SnakeController : MonoBehaviour
             GetComponent<SpriteRenderer>().color = colorData.currrentColor;
         }
 
-        if (WebGLUtils.IsMobile() || Application.isMobilePlatform)
+        // if (WebGLUtils.IsMobile() || Application.isMobilePlatform)
         {
             HandleTouchInput();
         }
