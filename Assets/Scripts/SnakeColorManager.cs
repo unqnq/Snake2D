@@ -18,14 +18,16 @@ public static class SnakeColorManager
 
     public static Color LoadColor(Color defaultColor)
     {
-#if UNITY_WEBGL
+        if (!PlayerPrefs.HasKey(COLOR_R) ||
+            !PlayerPrefs.HasKey(COLOR_G) ||
+            !PlayerPrefs.HasKey(COLOR_B))
+        {
+            return Color.red;
+        }
         float r = PlayerPrefs.GetFloat(COLOR_R, defaultColor.r);
         float g = PlayerPrefs.GetFloat(COLOR_G, defaultColor.g);
         float b = PlayerPrefs.GetFloat(COLOR_B, defaultColor.b);
         return new Color(r, g, b);
-#else
-        return defaultColor;
-#endif
     }
 }
 

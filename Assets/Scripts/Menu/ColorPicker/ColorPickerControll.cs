@@ -24,25 +24,17 @@ public class ColorPickerControll : MonoBehaviour
     void Start()
     {
         colorData = Resources.Load<ColorData>("ColorData");
-        colorData.currrentColor = SnakeColorManager.LoadColor(colorData.currrentColor);
+        var loaded = SnakeColorManager.LoadColor(Color.red);
+        colorData.currrentColor = loaded;
 
-        Color.RGBToHSV(colorData.currrentColor, out currenrtHue, out currentSaturation, out currentValue);
+        Color.RGBToHSV(loaded, out currenrtHue, out currentSaturation, out currentValue);
         CreateHueImage();
         CreateSaturationImage();
-
-        // if (colorData != null)
-        // {
-        //     Color.RGBToHSV(colorData.currrentColor, out currenrtHue, out currentSaturation, out currentValue);
-        // }
-        // else
-        // {
-        //     currenrtHue = 0f;
-        //     currentSaturation = 0.8f;
-        //     currentValue = 0.8f;
-        // }
         CreateOutputImage();
+
         UpdateOutputImage();
         UpdatePickerPosition();
+        UpdateRGB();
 
         foreach (SliderTextPair pair in sliderTextPairs)
         {
@@ -88,8 +80,8 @@ public class ColorPickerControll : MonoBehaviour
             }
         }
         saturationTexture.Apply();
-        currentSaturation = 0f;
-        currentValue = 0f;
+        // currentSaturation = 0f;
+        // currentValue = 0f;
         saturationImage.sprite = Sprite.Create(saturationTexture, new Rect(0, 0, saturationTexture.width, saturationTexture.height), new Vector2(0.5f, 0.5f));
     }
 

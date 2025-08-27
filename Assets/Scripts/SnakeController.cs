@@ -18,10 +18,6 @@ public class SnakeController : MonoBehaviour
     private DifficultyData difficultyData;
     void Start()
     {
-        // topWallPosition = GameObject.Find("TopWall").transform.position;
-        // bottomWallPosition = GameObject.Find("BottomWall").transform.position;
-        // leftWallPosition = GameObject.Find("LeftWall").transform.position;
-        // rightWallPosition = GameObject.Find("RightWall").transform.position;
         uiController = GameObject.Find("UIController")?.GetComponent<UIController>();
         colorData = Resources.Load<ColorData>("ColorData");
 
@@ -35,12 +31,8 @@ public class SnakeController : MonoBehaviour
 
         if (difficultyData != null)
         {
-#if UNITY_WEBGL
             stepRate = PlayerPrefs.GetFloat("StepRate", difficultyData.stepRate);
             difficultyData.startingTailLength = PlayerPrefs.GetInt("TailLength", difficultyData.startingTailLength);
-#else
-            stepRate = difficultyData.stepRate;
-#endif
         }
         nextMove = move;
         InvokeRepeating("Movement", 0.1f, stepRate);
@@ -71,8 +63,6 @@ public class SnakeController : MonoBehaviour
     {
         if (spawnFood)
         {
-
-
             Vector3 spawnPosition;
             bool canSpawn;
 
